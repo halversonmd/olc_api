@@ -3,6 +3,9 @@ var app = express();
 var fs = require('fs');
 var encode = require('./src/encode');
 var bodyParser = require('body-parser');
+var multer  = require('multer')
+
+var upload = multer({ dest: './uploads/' })
 
 app.use(bodyParser.json());
 
@@ -12,8 +15,9 @@ app.get('/coords', function (req, res) {
    });
 })
 
-app.post('/olcCodes', function (req, res) {
-    res.end( encode.encodeCoords(req.body) );
+app.post('/olcCodes', upload.single('olcFile'), async (req, res) => {
+    const respData = await encode.loadCsvFile(req.file.path)
+    res.json( {olcCodes: respData} )
 })
 
 var server = app.listen(8081, function () {

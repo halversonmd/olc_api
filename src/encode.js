@@ -4,9 +4,8 @@ let parse = require('csv-parse');
 let olc = require('./olc')
 
 var coordsToOlc = (coordsObj) => {
-    console.log(coordsObj)
-    let coords = coordsObj.coords
-    let codeLength = coordsObj.size
+    let coords = coordsObj
+    let codeLength = 6
     let r = 6371377.06 //radius of earth
     let h = 5566
     let w = 3500
@@ -66,14 +65,26 @@ var coordsToOlc = (coordsObj) => {
 
 }
 
-let loadCsv = (fileName) => {
-    return fs.readFile(fileName, (err, fileData) => {
-        parse(fileData, (er, rows) => {
-            console.log(coordsToOlc(rows.slice(1)))
+let loadCsv = async (fileName) => {
+    var j;
+    var resp = await new Promise((resolve, reject) => {
+        fs.readFile(fileName, (err, fileData) => {
+            parse(fileData, (er, rows) => {
+                resolve(j = coordsToOlc(rows.slice(1)))
+            })
         })
     })
+    return j
 }
 
+let parseBuf = (buf) => {
+    console.log('buf', buf)
+    parse(buf, (er, rows) => {
+        return coordsToOlc(rows.slice(1))
+        })
+}
 module.exports = {
-    encodeCoords: coordsToOlc
+    encodeCoords: coordsToOlc,
+    parseBuffer: parseBuf,
+    loadCsvFile: loadCsv
 }
