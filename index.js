@@ -9,6 +9,7 @@ var upload = multer({ dest: './uploads/' })
 
 app.use(bodyParser.json());
 
+
 app.get('/coords', function (req, res) {
    fs.readFile( __dirname + "/" + "coods.json", 'utf8', function (err, data) {
        res.end( data );
@@ -17,13 +18,13 @@ app.get('/coords', function (req, res) {
 
 app.post('/olcCodes', upload.single('olcFile'), async (req, res) => {
     const respData = await encode.loadCsvFile(req.file.path)
-    res.json( {olcCodes: respData} )
+    res.json( respData )
 })
 
-var server = app.listen(8081, function () {
+var apiServer = app.listen(8888, function () {
 
-  var host = server.address().address
-  var port = server.address().port
+  var host = apiServer.address().address
+  var port = apiServer.address().port
 
   console.log("Example app listening at http://%s:%s", host, port)
 

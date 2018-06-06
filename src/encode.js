@@ -61,7 +61,7 @@ var coordsToOlc = (coordsObj) => {
         olcSet.add(olc.encode(latitude, longitude, codeLength))
     }
 
-    return JSON.stringify([...olcSet])
+    return {olcCodes:[...olcSet], pois: coords}
 
 }
 
