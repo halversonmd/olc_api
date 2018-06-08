@@ -21,6 +21,14 @@ app.post('/olcCodes', upload.single('olcFile'), async (req, res) => {
     res.json( respData )
 })
 
+app.get('/olcCodes', async (req, res) => {
+    // console.log(req)
+    const coords = [[req.query.lat, req.query.lon]]
+    const respData = await encode.encodeCoords(coords, req.query.rad, req.query.sz)
+    console.log('respData', respData)
+    res.json( respData )
+})
+
 var apiServer = app.listen(8888, function () {
 
   var host = apiServer.address().address
