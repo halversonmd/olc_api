@@ -4,6 +4,7 @@ var fs = require('fs');
 var encode = require('./src/encode');
 var bodyParser = require('body-parser');
 var multer  = require('multer')
+
 var upload = multer({ dest: './uploads/' })
 
 app.use(bodyParser.json());
