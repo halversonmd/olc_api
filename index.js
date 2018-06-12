@@ -5,7 +5,9 @@ var encode = require('./src/encode');
 var bodyParser = require('body-parser');
 var multer  = require('multer')
 
-var upload = multer({ dest: './uploads/' })
+const path = require('path')
+const uploadFolder = path.join(__dirname, '/uploads/')
+var upload = multer({ dest: uploadFolder })
 
 app.use(bodyParser.json());
 
