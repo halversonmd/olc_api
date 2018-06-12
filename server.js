@@ -5,7 +5,7 @@ var fs = require('fs');
 var server = cp.fork('./index.js');
 console.log('Server started');
 
-fs.watchFile('index.js', function (event, filename) {
+fs.watchFile('./index.js', function (event, filename) {
     server.kill();
     console.log('Server stopped');
     server = cp.fork('./index.js');
