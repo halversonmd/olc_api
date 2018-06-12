@@ -3,11 +3,12 @@ let fs = require('fs');
 let parse = require('csv-parse');
 let olc = require('./olc')
 
-var coordsToOlc = (coords, radius, codeLength) => {
-
+var coordsToOlc = (coords, rad, codeLen) => {
+    var radius = parseInt(rad)
+    var codeLength = parseInt(codeLen)
     if (radius === 5) {
         var widthCount = 1
-        var widthIter = 4
+        var widthIter = 5
         var heightCount = 1.25
         var heightIter = 3
     } else if (radius === 10) {
