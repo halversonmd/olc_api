@@ -22,10 +22,10 @@ app.post('/olcCodes', upload.single('olcFile'), async (req, res) => {
 })
 
 app.get('/olcCodes', async (req, res) => {
-    // console.log(req)
+
     const coords = [[req.query.lat, req.query.lon]]
     const respData = await encode.encodeCoords(coords, req.query.rad, req.query.sz)
-    console.log('respData', respData)
+    console.log(respData)
     res.json( respData )
 })
 
