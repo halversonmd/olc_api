@@ -2,10 +2,11 @@ var process = require('process');
 var cp = require('child_process');
 var fs = require('fs');
 const path = require('path')
+const indexFile = path.join(__dirname, '/index.js')
 
 var server = cp.fork(indexFile);
+
 console.log('Server started');
-const indexFile = path.join(__dirname, '/index.js')
 console.log(indexFile)
 
 fs.watchFile(indexFile, function (event, filename) {
