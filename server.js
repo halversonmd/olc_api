@@ -23,6 +23,13 @@ fs.watchFile('./src/encode.js', function (event, filename) {
     console.log('Server started');
 });
 
+fs.watchFile('./src/verify.js', function (event, filename) {
+    server.kill();
+    console.log('Server stopped');
+    server = cp.fork(indexFile);
+    console.log('Server started');
+});
+
 process.on('SIGINT', function () {
     server.kill();
     fs.unwatchFile(indexFile);
