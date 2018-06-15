@@ -32,18 +32,8 @@ var coordsToOlc = (coords, rad, codeLen) => {
         return [startLat, startLon]
     }
 
-    let moveSouth = (lat) => {
-        let change = (h*2*180)/((r*2)*Math.PI)+lat
-        return lat - (change-lat)
-    }
-
-    let moveEast = (lat, lon) => {
-        return (((w/r)/(Math.cos(deg2rad(lat))*Math.cos(deg2rad(lat))))+deg2rad(lon))*(180/Math.PI)
-    }
-
     var olcArr = []
     for (var i=0; i<coords.length; i++){
-
         var latlngs = getStart((w*widthCount), (h*heightCount), parseFloat(coords[i][0]), parseFloat(coords[i][1]))
         olcArr.push(olc.encode(latlngs[0], latlngs[1], codeLength))
         for (var j=0; j<widthIter; j++){
